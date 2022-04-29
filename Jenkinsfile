@@ -3,8 +3,14 @@ pipeline {
     stages {
         stage('Pre-build') {
             steps {
-                sh 'ruby main.rb'
+                sh 'gem install sinatra -v1.4.8'
             }
+        }
+        stage('Build') {
+            steps {
+            sh 'run main.rb'
+            }
+
         }
     }
 }
