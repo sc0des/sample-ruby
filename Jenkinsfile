@@ -1,16 +1,30 @@
 pipeline {
-    agent any
-    stages {
-        stage('Pre-build') {
-            steps {
-                sh 'gem install sinatra -v1.4.8'
-            }
-        }
-        stage('Build') {
-            steps {
-            sh 'ruby main.rb'
-            }
+  agent any
+  
+  parameters {
+  choice choices: ['qa', 'production', 'cloud'], description: 'Select environment for deployment', name: 'DEPLOY_TO'
 
-        }
+    string(name: 'upstreamJobName',
+          defaultValue: '',
+          description: 'The name of the job the triggering upstream build'
+    )
+}
+
+
+  stages {
+    stage('Copy artifact') {
+      steps {
+        copyArtifacts filter: 'sample', fingerprintArtifacts: true,
+          projectName: "sample-rb/${params.upstreamJobName}", selector: lastSuccessful()
+      }
     }
+    stage('Deliver') {
+      steps {
+          sshagent(['vagrant-private-key']) {
+          sh 'ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ${DEPLOY_TO}.ini playbook.yml'
+        }
+      }
+    }
+
+  }
 }
