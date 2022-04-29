@@ -8,3 +8,4 @@
     { name: 'Hello',
       description: 'World',
       Url: request.url }.to_json
+end
