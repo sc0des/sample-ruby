@@ -14,7 +14,7 @@
         mode: "0777"
 
     - name: install ruby
-      sudo yum install -y ruby
+      command: sudo yum install -y ruby
 
     - name: install sinatra
       command: gem install sinatra -v1.4.8
