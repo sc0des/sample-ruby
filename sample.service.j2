@@ -1,0 +1,13 @@
+[Unit]
+Description=Simple service with API written in RUBY
+After=network.target
+
+
+[Service]
+User=vagrant
+Type=simple
+ExecStart=/usr/bin/ruby /home/vagrant/web.rb
+PIDFile=/var/run/sample
+
+[Install]
+WantedBy=default.target
