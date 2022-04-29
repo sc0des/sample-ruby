@@ -1,11 +1,10 @@
 pipeline {
-    agent any
+    agent { docker { image 'ruby:3.0.3-alpine' } }
     stages {
-        stage('Bulid') {
+        stage('build') {
             steps {
-                sh ' bundler exec ruby  main.rb'
+                sh 'ruby --version'
             }
         }
-     }
+    }
 }
-
