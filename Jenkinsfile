@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Bulid') {
             steps {
-                sh 'ruby main.rb'
+                sh '/usr/bin/ruby main.rb'
             }
         }
      }
