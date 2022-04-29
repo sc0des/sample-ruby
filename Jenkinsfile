@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-            sh 'run main.rb'
+            sh 'ruby main.rb'
             }
 
         }
