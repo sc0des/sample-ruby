@@ -14,11 +14,7 @@
         mode: "0777"
 
     - name: install ruby
-      yum:
-        name: ruby-2.0.0
-        state: present
-        update_cache: true
-      become: true
+      sudo yum install -y ruby
 
     - name: install sinatra
       command: gem install sinatra -v1.4.8

@@ -25,11 +25,6 @@ pipeline {
          }
        }
        
-        stage('Build') {
-            steps {
-            sh 'ruby main.rb'
-            }
-
-        }
+       
     }
 }
