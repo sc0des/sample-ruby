@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Bulid') {
             steps {
-                sh '/usr/bin/ruby main.rb'
+                sh ' bundler exec ruby  main.rb'
             }
         }
      }
