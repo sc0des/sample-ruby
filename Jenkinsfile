@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('build') {
+        stage('Pre-build') {
             steps {
                 sh 'ruby main.rb'
             }
