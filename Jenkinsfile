@@ -11,7 +11,7 @@ pipeline {
     }
     
     stages {
-       stage('Copy Artifact') {
+       stage('Copy and Archive Artifact') {
             steps {
                   archiveArtifacts artifacts: 'main.rb', followSymlinks: false
             }
