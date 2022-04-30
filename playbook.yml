@@ -1,25 +1,32 @@
 - hosts: target
   tasks:
+    - name: create vagrant folder
+      become: true
+      file:
+        dest: /home/vagrant
+        state: directory
+        mode: "0777"
+        
     - name: copy artifact
       ansible.builtin.copy:
         src: main.rb
-        dest: /home/vagrant/sample-ruby
+        dest: /home/vagrant/sample-rb
         mode: "0777"
-        
-    - name: ruby installation
-      command: sudo yum install -y ruby.x86_64
-      tags: ruby
-      
-    - name: sinatra installation
+
+    - name: install ruby
+      command: sudo yum install -y ruby
+
+    - name: install sinatra
       command: gem install sinatra -v1.4.8
-        
+
     - name: create simple service template
       become: true
       template:
-        src: sample-ruby.service.j2
-        dest: /etc/systemd/system/sample-ruby.service
-    - name: run sample ruby service
+        src: sample-rb.service.j2
+        dest: /etc/systemd/system/sample-rb.service
+
+    - name: run sample-rb service
       become: true
       ansible.builtin.systemd:
         state: restarted
-        name: sample-ruby
+        name: sample-rb
